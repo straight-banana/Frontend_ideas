@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Creative Lab</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: "Courier New", monospace;
+      transition: 0.3s;
+    }
+
+    cards {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 24px;
+    }
+
+    @media(min-width:640px) {
+      cards {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+
+    @media(min-width:768px) {
+      cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(min-width:1024px) {
+      cards {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media(min-width:1280px) {
+      cards {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media(min-width:1536px) {
+      cards {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+    card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      border-radius: 24px;
+      overflow: hidden;
+
+      transition: 0.3s;
+    }
+
+    .dark card {
+      background: rgba(8, 47, 73, 0.45);
+      border: 1px solid rgba(56, 189, 248, 0.12);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.05);
+    }
+
+    .light card {
+      background: white;
+      border: 1px solid rgba(37, 99, 235, 0.12);
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.05);
+    }
+
+    card:hover {
+      transform: translateY(-6px);
+    }
+
+    .dark card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .light card:hover {
+      border-color: rgba(37, 99, 235, 0.4);
+    }
+
+    card-content {
+      display: block;
+      padding: 24px;
+    }
+
+    tag {
+      display: inline-block;
+
+      padding: 7px 14px;
+      border-radius: 999px;
+
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+
+    .dark tag {
+      background: rgba(56, 189, 248, 0.12);
+      color: #7dd3fc;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .light tag {
+      background: rgba(37, 99, 235, 0.08);
+      color: #2563eb;
+      border: 1px solid rgba(37, 99, 235, 0.15);
+    }
+
+    .soon {
+      opacity: 0.6;
+    }
+
+    card h2 {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .dark card h2 {
+      color: #7dd3fc;
+    }
+
+    .light card h2 {
+      color: #2563eb;
+    }
+
+    card p {
+      line-height: 1.9;
+      letter-spacing: 1px;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .dark card p {
+      color: #cbd5e1;
+    }
+
+    .light card p {
+      color: #475569;
+    }
+
+    card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    card button {
+      width: 100%;
+
+      padding: 14px;
+
+      border-radius: 14px;
+
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+
+      transition: 0.3s;
+    }
+
+    .dark card button {
+      background: #0ea5e9;
+      color: black;
+    }
+
+    .dark card button:hover {
+      background: #38bdf8;
+    }
+
+    .light card button {
+      background: #2563eb;
+      color: white;
+    }
+
+    .light card button:hover {
+      background: #1d4ed8;
+    }
+
+    #themeToggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+
+      width: 52px;
+      height: 52px;
+
+      border-radius: 999px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 24px;
+
+      cursor: pointer;
+
+      transition: 0.3s;
+
+      z-index: 999;
+    }
+
+    .dark #themeToggle {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .light #themeToggle {
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(37, 99, 235, 0.15);
+    }
+
+    #themeToggle:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body class="dark bg-black text-white">
+
+  <button
+    onclick="toggleTheme()"
+    id="themeToggle"
+  >
+    🌙
+  </button>
+
+  <main class="max-w-[1900px] mx-auto px-6 py-10">
+
+    <div>
+
+      <h1 class="text-5xl md:text-7xl font-black uppercase leading-none">
+        Salam's
+        <br>
+
+        <span class="text-sky-400">
+          showcase
+        </span>
+      </h1>
+
+      <p class="mt-6 max-w-3xl uppercase tracking-[3px] leading-9 text-sm md:text-base text-slate-300">
+        A collection of experiments,
+        animations, and UI concepts.
+      </p>
+
+    </div>
+
+    <div class="w-full h-px bg-white/10 my-10"></div>
+
+    <cards>
+
+      <card>
+
+        <card-content>
+
+          <tag>
+            ● Live
+          </tag>
+
+          <h2>
+            Storefront 1
+          </h2>
+
+          <p>
+            Animated storefront UI
+            for tech products and desk setups.
+          </p>
+
+        </card-content>
+
+        <img
+          src="storeFront1.png"
+        >
+
+        <card-content>
+
+          <a href="storeFront1.html">
+            <button>
+              Open Project
+            </button>
+          </a>
+
+        </card-content>
+
+      </card>
+
+      <card>
+
+        <card-content>
+
+          <tag class="soon">
+            ● Soon
+          </tag>
+
+          <h2>
+            Coming soon
+          </h2>
+
+          <p>
+            Wait for it
+          </p>
+
+        </card-content>
+
+        <img
+          src="https://static.vecteezy.com/system/resources/thumbnails/035/727/489/small/blueprint-background-blue-lined-architecture-backdrop-technical-industrial-concept-illustration-wide-wallpaper-pattern-digital-paper-blank-template-illustration-vector.jpg"
+        >
+
+        <card-content>
+
+          <button>
+            unaivlable
+          </button>
+
+        </card-content>
+
+      </card>
+
+      <card>
+
+        <card-content>
+
+          <tag class="soon">
+            ● Soon
+          </tag>
+
+          <h2>
+            Coming soon
+          </h2>
+
+          <p>
+            Wait for it
+          </p>
+
+        </card-content>
+
+        <img
+          src="https://static.vecteezy.com/system/resources/thumbnails/035/727/489/small/blueprint-background-blue-lined-architecture-backdrop-technical-industrial-concept-illustration-wide-wallpaper-pattern-digital-paper-blank-template-illustration-vector.jpg"
+        >
+
+        <card-content>
+
+          <button>
+            unaivlable
+          </button>
+
+        </card-content>
+
+      </card>
+
+      <card>
+
+        <card-content>
+
+          <tag class="soon">
+            ● Soon
+          </tag>
+
+          <h2>
+            Coming soon
+          </h2>
+
+          <p>
+            Wait for it
+          </p>
+
+        </card-content>
+
+        <img
+          src="https://static.vecteezy.com/system/resources/thumbnails/035/727/489/small/blueprint-background-blue-lined-architecture-backdrop-technical-industrial-concept-illustration-wide-wallpaper-pattern-digital-paper-blank-template-illustration-vector.jpg"
+        >
+
+        <card-content>
+
+          <button>
+            unaivlable
+          </button>
+
+        </card-content>
+
+      </card>
+
+      <card>
+
+        <card-content>
+
+          <tag class="soon">
+            ● Soon
+          </tag>
+
+          <h2>
+            Coming soon
+          </h2>
+
+          <p>
+            Wait for it
+          </p>
+
+        </card-content>
+
+        <img
+          src="https://static.vecteezy.com/system/resources/thumbnails/035/727/489/small/blueprint-background-blue-lined-architecture-backdrop-technical-industrial-concept-illustration-wide-wallpaper-pattern-digital-paper-blank-template-illustration-vector.jpg"
+        >
+
+        <card-content>
+
+          <button>
+            unaivlable
+          </button>
+
+        </card-content>
+
+      </card>
+
+  </main>
+
+  <script>
+    function toggleTheme() {
+
+      const body = document.body;
+      const html = document.documentElement;
+      const button = document.getElementById("themeToggle");
+
+      html.classList.toggle("dark");
+
+      if (body.classList.contains("dark")) {
+
+        body.classList.remove(
+          "dark",
+          "bg-black",
+          "text-white"
+        );
+
+        body.classList.add(
+          "light",
+          "bg-blue-50",
+          "text-black"
+        );
+
+        button.innerHTML = "☀️";
+      }
+
+      else {
+
+        body.classList.remove(
+          "light",
+          "bg-blue-50",
+          "text-black"
+        );
+
+        body.classList.add(
+          "dark",
+          "bg-black",
+          "text-white"
+        );
+
+        button.innerHTML = "🌙";
+      }
+    }
+  </script>
+
+</body>
+
+</html>
